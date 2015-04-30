@@ -1,0 +1,85 @@
+<!--
+
+Somehow detect the size of the browser's scrollbar
+Add padding based on that amount?
+We don't want content to be potentially cut off
+
+-->
+
+<style>
+    body {
+        background-color: #000;
+    }
+    
+    .magic {
+        overflow: hidden;
+        width: 300px;
+        height: 300px;
+        position: relative;
+    }
+
+    .scrollbar {
+        position: absolute;
+        right: 0;
+        width: 15px;
+        height: 20px;
+        border: 1px solid blue;
+    }
+    
+    .content {
+        background-color: #fff;
+        width: 315px;
+        height: 300px;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+</style>
+
+
+<div class="magic">
+    <div class="scrollbar">
+        
+    </div>
+    
+    <div class="content">
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+        A box with a lot of content! <br>
+    </div>
+</div>
+
+<div class="scroll-box">
+
+</div>
+    
