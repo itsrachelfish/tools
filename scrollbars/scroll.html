@@ -32,6 +32,10 @@ We don't want content to be potentially cut off
         width: 15px;
         border: 1px solid blue;
     }
+
+    .scrollbar.active {
+        background-color: #ccc;
+    }
     
 </style>
 
@@ -114,7 +118,49 @@ function updateScrollbar()
     $('.scrollbar')[0].style.top = barPosition + "%";
 }
 
+// Update the scrollbar whenever the box is scrolled
+$('.scroll-inner')[0].addEventListener('scroll', updateScrollbar);
+
+// Initialze the scrollbar on page load
 updateScrollbar();
+
+function addClass(element, className)
+{
+    var classes = element.className.split(' ');
+    var index = classes.indexOf(className);
+
+console.log(element, classes, index);
+
+    // Only add a class if it doesn't exist
+    if(index == -1)
+    {
+        classes.push(className);
+        element.className = classes.join(' ');
+    }
+}
+
+function removeClass(element, className)
+{
+    var classes = element.className.split(' ');
+    var index = classes.indexOf(className);
+
+    // Only remove a class if it exists
+    if(index != -1)
+    {
+        classes.splice(index, 1);
+        element.className = classes.join(' ');
+    }
+}
+
+$('.scrollbar')[0].addEventListener('mousedown', function()
+{
+    addClass($('.scrollbar')[0], 'active');
+});
+
+$('html')[0].addEventListener('mouseup', function()
+{
+    removeClass($('.scrollbar')[0], 'active');
+});
 
 
 </script>
