@@ -51,34 +51,43 @@ We don't want content to be potentially cut off
             A box with a lot of content! <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
-            A box with a lot of content! <br>
+            Sometimes the content changes... <br>
             A box with a lot of content! <br>
             A box with a lot of content! <br>
         </div>
@@ -129,8 +138,6 @@ function addClass(element, className)
     var classes = element.className.split(' ');
     var index = classes.indexOf(className);
 
-console.log(element, classes, index);
-
     // Only add a class if it doesn't exist
     if(index == -1)
     {
@@ -152,14 +159,43 @@ function removeClass(element, className)
     }
 }
 
-$('.scrollbar')[0].addEventListener('mousedown', function()
+var scroll = {active: false};
+
+$('.scrollbar')[0].addEventListener('mousedown', function(event)
 {
     addClass($('.scrollbar')[0], 'active');
+    scroll.active = true;
+
+    scroll.lastX = event.clientX;
+    scroll.lastY = event.clientY;
+});
+
+$('html')[0].addEventListener('mousemove', function(event)
+{
+    if(scroll.active)
+    {
+        event.preventDefault();
+        
+        // Find the amount the scrollbar should move
+        var barDelta = event.clientY - scroll.lastY;
+
+        // Find the amount the actual scroll area needs to move
+        var scrollHeight = outerHeight($('.scroll-inner')[0]);
+        var contentHeight = outerHeight($('.scroll-content')[0]);
+
+        var scrollDelta = contentHeight / scrollHeight * barDelta;
+
+        $('.scroll-inner')[0].scrollTop += scrollDelta;
+
+        scroll.lastX = event.clientX;
+        scroll.lastY = event.clientY;
+    }
 });
 
 $('html')[0].addEventListener('mouseup', function()
 {
     removeClass($('.scrollbar')[0], 'active');
+    scroll.active = false;
 });
 
 
