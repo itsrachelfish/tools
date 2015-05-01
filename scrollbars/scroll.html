@@ -26,7 +26,7 @@ We don't want content to be potentially cut off
         border: 1px solid blue;
     }
     
-    .content {
+    .scroll-area {
         background-color: #fff;
         width: 315px;
         height: 300px;
@@ -40,46 +40,81 @@ We don't want content to be potentially cut off
     <div class="scrollbar">
         
     </div>
-    
-    <div class="content">
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
-        A box with a lot of content! <br>
+
+    <div class="scroll-area">
+        <div class="content">
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+            A box with a lot of content! <br>
+        </div>
     </div>
 </div>
 
 <div class="scroll-box">
 
-</div>
+</div>    
+
+<script>
+
+function $(selector)
+{
+    return document.querySelectorAll(selector);
+}
+
+// By George, from stack overflow: http://stackoverflow.com/questions/16537804/how-to-find-real-div-height/16538582#16538582
+function outerHeight(elem)
+{
+    var curStyle = elem.currentStyle || window.getComputedStyle(elem);
+    height = elem.offsetHeight;
+    height += parseInt(curStyle.marginTop);
+    height += parseInt(curStyle.marginBottom);
     
+    return height;
+}
+
+function detectSize(selector)
+{
+//    console.log($(selector));
+//    return $(selector)[0].style.height;
+}
+
+
+console.log(outerHeight($('.magic')[0]));
+console.log(outerHeight($('.scroll-area')[0]));
+console.log(outerHeight($('.content')[0]));
+
+//console.log(detectSize('.magic'));
+
+
+</script>
