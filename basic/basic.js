@@ -3,23 +3,117 @@
 // Function chaining
 // Complete control over what functions are available
 
-var $ = function(selector)
+var $ = basic = (function()
 {
-    this.elements = document.querySelectorAll(selector);
-    return this;
-}
+    // A constructor for public functions
+    var public = function(selector)
+    {
+        if (!(this instanceof public))
+        {
+            return new public(selector)
+        }
+        
+        this.elements = document.querySelectorAll(selector);
+        return this;
+    }
 
-$.prototype.addClass = function(class)
-{
+    // An object literal for private functions
+    var private =
+    {
+        forEach: function(array, callback)
+        {
+            for(var i = 0, l = array.length; i < l; i++)
+            {
+                callback.call(public, i, array[i]);
+            }
+        }
+    };
 
-}
+    public.prototype.addClass = function(className)
+    {
+        private.forEach(this.elements, function(index, element)
+        {
+            var classes = element.className.split(' ');
+            var index = classes.indexOf(className);
 
-$.prototype.removeClass = function(class)
-{
+            // Only add a class if it doesn't exist
+            if(index == -1)
+            {
+                classes.push(className);
+                element.className = classes.join(' ');
+            }
+        });
+                
+        return this;
+    }
 
-}
+    public.prototype.removeClass = function(className)
+    {
+        private.forEach(this.elements, function(index, element)
+        {
+            var classes = element.className.split(' ');
+            var index = classes.indexOf(className);
 
-$.prototype.size = function()
-{
+            // Only remove a class if it exists
+            if(index != -1)
+            {
+                classes.splice(index, 1);
+                element.className = classes.join(' ');
+            }
+        });
 
-}
+        return this;
+    }
+
+    private.height = function(element)
+    {
+        var style = element.currentStyle || window.getComputedStyle(element);
+        var height =
+        {
+            inner: element.offsetHeight,
+            outer: element.offsetHeight + parseInt(style.marginTop) + parseInt(style.marginBottom)
+        };
+
+        return height;
+    }
+
+    private.width = function(element)
+    {
+        var style = element.currentStyle || window.getComputedStyle(element);
+        var width =
+        {
+            inner: element.offsetWidth,
+            outer: element.offsetWidth + parseInt(style.marginLeft) + parseInt(style.marginRight)
+        };
+
+        return width;
+    }
+
+    public.prototype.size = function()
+    {
+        var output = [];
+
+        private.forEach(this.elements, function(index, element)
+        {
+            var size =
+            {
+                height: private.height(element),
+                width: private.width(element)
+            };
+            
+            output.push(size);
+        });
+
+        // If we were only checking the size of one element
+        if(output.length == 1)
+        {
+            // Return only that element's size
+            return output[0];
+        }
+
+        // Otherwise, return an array of sizes
+        return output;
+    }
+
+    return public;
+})();

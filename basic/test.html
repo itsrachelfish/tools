@@ -1,0 +1,45 @@
+<style>
+    .hello { margin: 20px; border: 1px solid #fff; }
+    .world { position: absolute; right: 25px; border: 1px solid #000; height: 240px; width: 120px; }
+    .test { border: 1px solid #00f; }
+</style>
+
+<div class="hello">
+    Hello world!
+</div>
+
+<div class="world"></div>
+
+<b>This sure is neato</b>
+
+<script src="basic.js"></script>
+
+<script>
+    // Match a selector
+    console.log($('.hello'));
+
+    // Get the size of a selector
+    console.log($('.hello').size());
+    console.log($('.world').size());
+
+    // Get the sizes of every matched selector
+    console.log($('div').size());
+
+    // Add a class
+    setInterval(function()
+    {
+        $('.hello').addClass('test');
+    }, 1000);
+
+    // Remove a class
+    setInterval(function()
+    {
+        $('.hello').removeClass('test');
+    }, 2000);
+
+    // Modify an element's style
+    setInterval(function()
+    {
+        $('b').elements[0].style.color = "green";
+    }, 3000);
+</script>
